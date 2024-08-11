@@ -1,0 +1,36 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+}
+
+header h1 {
+    color: #4A90E2;
+    font-size: 2em;
+}
+
+.transcription-text {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 1em;
+    white-space: pre-wrap; /* Preserve line breaks */
+}
+
+.image-gallery img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+footer {
+    font-size: 0.9em;
+    color: #777;
+}

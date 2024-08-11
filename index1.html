@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmoQuant - Sentiment Analysis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">EmoQuant</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Future</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <header class="text-center mb-4">
+            <h1 class="display-4">EmoQuant Sentiment Analysis</h1>
+        </header>
+        <main>
+            <section class="upload-section mb-4">
+                <div class="custom-file">
+                    <input type="file" id="audioFile" class="custom-file-input" accept="audio/*">
+                    <label class="custom-file-label" for="audioFile">Choose audio file</label>
+                </div>
+                <button class="btn btn-success btn-lg mt-3" onclick="processAudio()">Upload and Analyze</button>
+            </section>
+            <section id="spinner" class="text-center mb-4" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="mt-2">Processing your audio...</p>
+            </section>
+            <section id="results" class="results-section text-center" style="display: none;">
+                <h2 class="mb-4">Sentiment Analysis Results</h2>
+                <div id="sentimentScores" class="scores-list mb-4">
+                    <!-- Sentiment scores will be displayed here -->
+                </div>
+                <div id="images" class="image-gallery d-flex justify-content-center gap-3 mb-4">
+                    <div class="card">
+                        <img src="image1.png" alt="Image 1" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Normalised Sentiment Analysis Result</h5>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div id="transcription" class="transcription-text mb-4">
+                    <!-- Transcription text will be displayed here -->
+                </div>
+            </section>
+        </main>
+        <footer class="text-center mt-4">
+            <p>&copy; 2024 EmoQuant. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'Choose audio file';
+            e.target.nextElementSibling.innerText = fileName;
+        });
+
+        function processAudio() {
+            const audioFile = document.getElementById('audioFile').files[0];
+            if (!audioFile) {
+                alert('Please upload an audio file.');
+                return;
+            }
+
+            // Show spinner and hide results
+            document.getElementById('spinner').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+
+            // Simulate processing time
+            setTimeout(() => {
+                const fakeScores = {
+                    'negative': 16,
+                    'sadness': 6,
+                    'joy': 11,
+                    'positive': 18,
+                    'anticipation': 11,
+                    'surprise': 5,
+                    'trust': 13,
+                    'anger': 10,
+                    'disgust': 3,
+                    'fear': 5
+                };
+
+                const fakeTranscription = "Transcription Text: It is literally impossible to be a woman. You are so beautiful and so smart and it kills me that you don't think you're good enough. Like, we have to always be extraordinary. But somehow we're always doing it wrong. You have to be thin but not too thin. And you can never say you want to be thin. You have to say you want to be healthy but also you have to be thin. You have to have money but you can't ask for money because that's crass. You have to be a boss but you can't be mean. You have to lead but you can't squash other people's ideas. You're supposed to love being a mother but don't talk about your kids all the damn time. You have to be a career woman but also always be looking out for other people. You have to answer for men's bad behavior which is insane but if you point that out you're accused of complaining. You're supposed to stay pretty for men but not so pretty that you tempt them too much or that you threaten other women because you're supposed to be a part of the sisterhood but always stand out and always be grateful. But never forget that the system is raised so find a way to acknowledge that but also always be grateful. You have to never get old. Never be rude. Never show off. Never be selfish. Never fall down. Never fail. Never show fear. Never get out of line. It's too hard. It's too contradictory and nobody gives you a medal or says thank you. And it turns out in fact that not only are you doing everything wrong but also everything is your fault. I'm just so tired of watching myself and every single other woman tie herself into knots so that people will like us. And if all of that is also true for a doll just representing a woman. Then I don't even know.";
+
+                let scoresHtml = '<ul class="list-group">';
+                for (const [emotion, score] of Object.entries(fakeScores)) {
+                    scoresHtml += `<li class="list-group-item"><strong>${emotion.charAt(0).toUpperCase() + emotion.slice(1)}:</strong> ${score}</li>`;
+                }
+                scoresHtml += '</ul>';
+
+                document.getElementById('transcription').innerText = fakeTranscription;
+                document.getElementById('sentimentScores').innerHTML = scoresHtml;
+                document.getElementById('results').style.display = 'block';
+                document.getElementById('spinner').style.display = 'none'; // Hide spinner
+            }, 3000); // Simulate 3 seconds of processing time
+        }
+    </script>
+</body>
+</html>

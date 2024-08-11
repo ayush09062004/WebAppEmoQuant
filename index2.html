@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmoQuant - Recorded Video Analysis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">EmoQuant</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Future</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <header class="text-center mb-4">
+            <h1 class="display-4">EmoQuant Recorded Video Analysis</h1>
+        </header>
+        <main>
+            <section class="upload-section mb-4">
+                <div class="custom-file">
+                    <input type="file" id="videoFile" class="custom-file-input" accept="video/*">
+                    <label class="custom-file-label" for="videoFile">Choose video file</label>
+                </div>
+                <button class="btn btn-success btn-lg mt-3" onclick="processVideo()">Upload and Analyze</button>
+            </section>
+            <section id="spinner" class="text-center mb-4" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="mt-2">Processing your video...</p>
+            </section>
+            <section id="results" class="results-section" style="display: none;">
+                <h2 class="text-center mb-4">Analysis Results</h2>
+                <div class="row">
+                    <div class="col-md-6 d-flex align-items-stretch mb-4">
+                        <div class="card flex-fill">
+                            <div class="card-body">
+                                <h5 class="card-title">Video-based Emotion Analysis</h5>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Emotion</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Sad</td><td>21</td></tr>
+                                        <tr><td>Neutral</td><td>19</td></tr>
+                                        <tr><td>Fear</td><td>15</td></tr>
+                                        <tr><td>Happy</td><td>12</td></tr>
+                                        <tr><td>Angry</td><td>4</td></tr>
+                                        <tr><td>Surprise</td><td>3</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <img src="image2.png" alt="Video Emotion Analysis" class="card-img-bottom">
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-stretch mb-4">
+                        <div class="card flex-fill">
+                            <div class="card-body">
+                                <h5 class="card-title">Audio-based Sentiment Analysis</h5>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Sentiment</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Negative</td><td>16</td></tr>
+                                        <tr><td>Sadness</td><td>6</td></tr>
+                                        <tr><td>Joy</td><td>11</td></tr>
+                                        <tr><td>Positive</td><td>18</td></tr>
+                                        <tr><td>Anticipation</td><td>11</td></tr>
+                                        <tr><td>Surprise</td><td>5</td></tr>
+                                        <tr><td>Trust</td><td>13</td></tr>
+                                        <tr><td>Anger</td><td>10</td></tr>
+                                        <tr><td>Disgust</td><td>3</td></tr>
+                                        <tr><td>Fear</td><td>5</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <img src="image1.png" alt="Audio Sentiment Analysis" class="card-img-bottom">
+                        </div>
+                    </div>
+                </div>
+                <div id="transcription" class="transcription-text mt-4 text-center">
+                    <!-- Transcription text will be displayed here -->
+                </div>
+            </section>
+        </main>
+        <footer class="text-center mt-4">
+            <p>&copy; 2024 EmoQuant. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'Choose video file';
+            e.target.nextElementSibling.innerText = fileName;
+        });
+
+        function processVideo() {
+            const videoFile = document.getElementById('videoFile').files[0];
+            if (!videoFile) {
+                alert('Please upload a video file.');
+                return;
+            }
+
+            // Show spinner and hide results
+            document.getElementById('spinner').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+
+            // Simulate processing time
+            setTimeout(() => {
+                // Display fake transcription
+                const fakeTranscription = "Transcription Text:\n\nWhen I was little, I used to think that God had a plan for me, or maybe not God, but like the universe or something. I was invisible because everyone was staring at Cassandra all the time. Anyway, one day my mom sat me down and said, just wait, you'll see, your time will come. And I thought about that every single day, my time will come. And then this happened. This responsibility and I didn't want it and I didn't like it. And then I did want it. And now I really want it. And I want to do it well as well as it could be done. It's almost like my mom had been right about me or something. Isn't that stupid? All she was trying to do was make a little kid feel better.";
+                
+                document.getElementById('transcription').innerText = fakeTranscription;
+                document.getElementById('results').style.display = 'block';
+                document.getElementById('spinner').style.display = 'none'; // Hide spinner
+            }, 3000); // Simulate 3 seconds of processing time
+        }
+    </script>
+</body>
+</html>

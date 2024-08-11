@@ -1,0 +1,75 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+}
+
+header h1 {
+    color: #4A90E2;
+    font-size: 2.5em;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.guidelines-section {
+    background: #e9f7fe;
+    border: 1px solid #d1e9f4;
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 1.1em;
+    animation: fadeInUp 2s ease-in-out;
+}
+
+.alert {
+    border-radius: 8px;
+}
+
+footer {
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Additional Styles */
+.guidelines-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.guidelines-section ul li {
+    padding: 5px 0;
+}
+
+.guidelines-section a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.guidelines-section a:hover {
+    text-decoration: underline;
+}
+
+.or-section {
+    text-align: center;
+}
+
+.or-text {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #4A90E2;
+}
